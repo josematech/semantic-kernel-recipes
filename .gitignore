@@ -1,0 +1,54 @@
+﻿# Build results
+bin/
+obj/
+out/
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+*.nuspec
+
+# Test results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Local environment files
+.env
+.env.*
+
+# OS generated files
+*.swp
+*.tmp
+*.bak
+*.log
+
+# Rider project files
+.idea/
+*.sln.iml
+
+# Visual Studio files
+.vs/
+
+# Docker
+docker-compose.override.yml
+
+# Others
+*.vspscc
+*.vssscc
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# Dotnet tool restore cache
+.tool/
+

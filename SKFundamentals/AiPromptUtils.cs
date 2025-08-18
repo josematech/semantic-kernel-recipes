@@ -91,14 +91,16 @@ namespace SKFundamentals
         [Experimental("SKEXP0001")]
         public static async Task CreateTravelLoungeImage(string modelName)
         {
-            var kernel = CreateKernel(modelName);
+            var imageApiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") ?? string.Empty;
+            var kernel = Kernel.CreateBuilder()
+                .AddOpenAITextToImage(modelId: modelName, apiKey: imageApiKey).Build();
             ITextToImageService imageService = kernel.GetRequiredService<ITextToImageService>();
 
             const string prompt = $@"Imagine a vibrant travel agency lounge inspired by the spirit of global adventure. The space features sleek, modern furniture with pops of color representing different continents, large world maps adorning the walls, and interactive digital displays showcasing breathtaking destinations.
 Sunlight streams through panoramic windows, illuminating travel memorabilia, vintage suitcases, and shelves filled with guidebooks and souvenirs. The atmosphere is energetic yet welcoming, encouraging visitors to dream, plan, and embark on their next unforgettable journey.
 Cozy nooks with plush seating invite guests to relax and discuss travel ideas, while a central coffee bar offers international treats and beverages. The overall design celebrates exploration, curiosity, and the joy of discovering new places.";
 
-            var image = await imageService.GenerateImageAsync(prompt, 896, 512);
+            var image = await imageService.GenerateImageAsync(prompt, 1024, 1024);
             Console.WriteLine("Image URL: " + image);
         }
     }

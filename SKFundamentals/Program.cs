@@ -8,9 +8,12 @@ builder.SetBasePath(Directory.GetCurrentDirectory())
 IConfiguration config = builder.Build();
 
 var modelName = config["modelName"];
-await AiPromptUtils.BasicPromptInteraction(modelName);
-//await AIPromptUtils.ChatWithHistory(modelName);
-//await AIPromptUtils.TravelStreamingDemo(modelName);
-//await AIPromptUtils.StartupIdeaSettingsDemo(modelName);
-//await AIPromptUtils.CreateTravelLoungeImage(modelName);
+//await AiPromptUtils.BasicPromptInteraction(modelName);
+//await AiPromptUtils.ChatWithHistory(modelName);
+//await AiPromptUtils.TravelStreamingDemo(modelName);
+//await AiPromptUtils.StartupIdeaSettingsDemo(modelName);
+#pragma warning disable SKEXP0001
+var imageModelName = config["imageModelName"];
+await AiPromptUtils.CreateTravelLoungeImage(imageModelName);
+#pragma warning restore SKEXP0001
 return;

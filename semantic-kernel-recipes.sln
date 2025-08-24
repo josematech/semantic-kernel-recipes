@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SKFundamentals", "SKFundamentals\SKFundamentals.csproj", "{078D1527-0AB5-4A4F-9356-6A7E22118D19}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionCallingBasics", "FunctionCallingBasics\FunctionCallingBasics.csproj", "{F6876AB4-DA6F-4EEF-B319-10C23B37F1C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{078D1527-0AB5-4A4F-9356-6A7E22118D19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{078D1527-0AB5-4A4F-9356-6A7E22118D19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{078D1527-0AB5-4A4F-9356-6A7E22118D19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6876AB4-DA6F-4EEF-B319-10C23B37F1C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6876AB4-DA6F-4EEF-B319-10C23B37F1C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6876AB4-DA6F-4EEF-B319-10C23B37F1C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6876AB4-DA6F-4EEF-B319-10C23B37F1C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

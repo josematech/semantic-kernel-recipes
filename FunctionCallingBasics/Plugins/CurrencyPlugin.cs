@@ -85,8 +85,6 @@ public class CurrencyPlugin : IDisposable
     public async Task<string> GetCurrencyInfoAsync(
         [Description("The currency code to get information about")] string currencyCode)
     {
-        await Task.Delay(200);
-
         var currencyInfo = currencyCode.ToUpper() switch
         {
             "USD" => "United States Dollar - The world's primary reserve currency",

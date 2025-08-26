@@ -9,9 +9,9 @@ IConfiguration config = builder.Build();
 var modelName = config["modelName"];
 
 // Other demos (commented out)
+
+await FunctionCallingBasics.FunctionCallingUtils.WeatherChatDemo(modelName);
 //await FunctionCallingBasics.FunctionCallingUtils.ParallelismDemoComparison(modelName);
-//await FunctionCallingBasics.FunctionCallingUtils.WeatherChatDemo(modelName);
-//await FunctionCallingBasics.FunctionCallingUtils.DocumentSummarizationDemo(modelName);
 //await FunctionCallingBasics.FunctionCallingUtils.CurrencyConversionDemo(modelName);
 //await FunctionCallingBasics.FunctionCallingUtils.SecurityFilterDemo(modelName);
-await FunctionCallingBasics.FunctionCallingUtils.ComplexSecurityDemo(modelName);
+//await FunctionCallingBasics.FunctionCallingUtils.ComplexSecurityDemo(modelName);

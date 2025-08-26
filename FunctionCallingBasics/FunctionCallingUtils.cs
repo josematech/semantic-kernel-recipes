@@ -3,6 +3,7 @@ using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 using FunctionCallingBasics.Plugins;
 using FunctionCallingBasics.Filters;
+using Microsoft.SemanticKernel.Plugins.Core;
 
 namespace FunctionCallingBasics;
 
@@ -30,81 +31,6 @@ public static class FunctionCallingUtils
             Console.WriteLine(assistantMessage);
             chatHistory.Add(assistantMessage);
         }
-    }
-
-    public static async Task DocumentSummarizationDemo(string modelName)
-    {
-        var kernel = CreateKernel(modelName);
-
-        Console.WriteLine("\n--- Document Summarization Example ---");
-
-        const string longArticle = """
-                                   Function calling in LLMs allows models to break through knowledge, execution, and skill walls.
-                                   Large Language Models have revolutionized how we interact with AI systems, but they face inherent limitations.
-                                   These models are trained on data up to a certain point in time, creating a knowledge wall that prevents them
-                                   from accessing real-time information. Additionally, they cannot execute code or interact with external systems
-                                   directly, forming an execution wall. Finally, they may lack specialized skills for domain-specific tasks,
-                                   creating a skill wall.
-                                   
-                                   Function calling bridges these gaps by enabling LLMs to invoke external functions, access live data, execute 
-                                   operations, and leverage specialized tools, transforming them from static text generators into dynamic, capable 
-                                   AI agents that can solve complex real-world problems.
-                                   
-                                   The implementation of function calling involves several key components. First, the model must understand the 
-                                   available functions and their parameters through detailed function descriptions. Second, the model needs to 
-                                   determine when to call a function based on user input and context. Third, the system must execute the function 
-                                   call and return results to the model for further processing.
-                                   
-                                   Popular frameworks like OpenAI's GPT models, Microsoft's Semantic Kernel, and Google's function calling APIs 
-                                   provide robust implementations of this capability. These platforms allow developers to register custom functions, 
-                                   define their schemas, and let the AI automatically decide when and how to use them.
-                                   
-                                   The benefits of function calling extend beyond simple API interactions. They enable AI agents to perform complex 
-                                   workflows, integrate with enterprise systems, handle multi-step reasoning tasks, and provide more accurate and 
-                                   up-to-date responses. This technology is fundamental to building sophisticated AI applications that can interact 
-                                   with the real world effectively and reliably.
-                                   """;
-
-        var summarizeSettings = new OpenAIPromptExecutionSettings
-        {
-            ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions
-        };
-
-        var arguments = new KernelArguments(summarizeSettings);
-
-        var summaryResponse = await kernel.InvokePromptAsync(
-            $"Summarize this article in 3 bullet points:\n\n{longArticle}",
-            arguments);
-
-        Console.WriteLine(summaryResponse);
-    }
-
-    public static async Task CurrencyConversionDemo(string modelName)
-    {
-        var kernel = CreateKernel(modelName);
-        kernel.ImportPluginFromType<CurrencyPlugin>();
-
-        Console.WriteLine("\n--- Currency Conversion with Parallel Function Calls Demo ---");
-        Console.WriteLine("Note: Using real-time exchange rates with automatic parallel calls");
-
-        var settings = new OpenAIPromptExecutionSettings
-        {
-            ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions
-        };
-
-        var arguments = new KernelArguments(settings);
-
-        var conversionQuery = """
-        Convert 500 USD to EUR, GBP, and JPY using current exchange rates. 
-        Also get the current exchange rates for each conversion.
-        Present the results in a clear format and mention if real-time or fallback rates are used.
-        """;
-
-        Console.WriteLine("Converting currencies with parallel function calls...\n");
-
-        var result = await kernel.InvokePromptAsync(conversionQuery, arguments);
-
-        Console.WriteLine(result);
     }
 
     public static async Task ParallelismDemoComparison(string modelName)
@@ -211,6 +137,34 @@ public static class FunctionCallingUtils
         Console.WriteLine($"\n🚀 PARALLEL EXECUTION TIME: {duration.TotalSeconds:F2} seconds");
         Console.WriteLine($"\n--- PARALLEL RESULTS ---");
         Console.WriteLine($"{result}");
+    }
+
+    public static async Task CurrencyConversionDemo(string modelName)
+    {
+        var kernel = CreateKernel(modelName);
+        kernel.ImportPluginFromType<CurrencyPlugin>();
+
+        Console.WriteLine("\n--- Currency Conversion with Parallel Function Calls Demo ---");
+        Console.WriteLine("Note: Using real-time exchange rates with automatic parallel calls");
+
+        var settings = new OpenAIPromptExecutionSettings
+        {
+            ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions
+        };
+
+        var arguments = new KernelArguments(settings);
+
+        var conversionQuery = """
+        Convert 500 USD to EUR, GBP, and JPY using current exchange rates. 
+        Also get the current exchange rates for each conversion.
+        Present the results in a clear format and mention if real-time or fallback rates are used.
+        """;
+
+        Console.WriteLine("Converting currencies with parallel function calls...\n");
+
+        var result = await kernel.InvokePromptAsync(conversionQuery, arguments);
+
+        Console.WriteLine(result);
     }
 
     public static async Task SecurityFilterDemo(string modelName)
